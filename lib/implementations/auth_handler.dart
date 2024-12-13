@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -153,6 +154,9 @@ class AuthHandler {
           error: loggingOptions.error,
         ),
       );
+    }
+    if (authOptions.interceptorsForRefreshToken.isNotEmpty) {
+      newDioClient.interceptors.addAll(authOptions.interceptorsForRefreshToken);
     }
 
     if (options.overrideBadCertificate && !kIsWeb) {
